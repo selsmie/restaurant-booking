@@ -35,7 +35,11 @@ public class Reservation {
     @JsonIgnoreProperties({"reservations"})
     private Restaurant restaurant;
 
+    @Column(name = "status")
+    private String status;
+
     public Reservation() {
+        this.status = "booked";
     }
 
     public Reservation(int covers, String date, String time, Guest guest, Restaurant restaurant, String notes) {
@@ -45,6 +49,7 @@ public class Reservation {
         this.guest = guest;
         this.restaurant = restaurant;
         this.notes = notes;
+        this.status = "booked";
     }
 
     public Reservation(int covers, String date, String time, Guest guest, Restaurant restaurant) {
@@ -53,6 +58,7 @@ public class Reservation {
         this.time = time;
         this.guest = guest;
         this.restaurant = restaurant;
+        this.status = "booked";
     }
 
     public Long getId() {
@@ -109,5 +115,13 @@ public class Reservation {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

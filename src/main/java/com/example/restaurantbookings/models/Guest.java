@@ -36,6 +36,8 @@ public class Guest {
     private List<Reservation> reservations;
 
     public Guest() {
+        this.visits = 0;
+        this.reservations = new ArrayList<>();
     }
 
     public Guest(String firstName, String lastName, String phoneNumber, String email) {

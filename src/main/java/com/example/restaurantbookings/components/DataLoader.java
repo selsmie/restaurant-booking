@@ -29,15 +29,28 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
-        Guest simon = new Guest("Simon", "Elsmie", "07825177555", "simonelsmie@hotmail.com");
+        Guest simon = new Guest("Simon", "Elsmie", "07711222333", "simone@example.com");
         guestRepository.save(simon);
+
+        Guest tom = new Guest("Tom", "Bombadil", "07822999777", "tom-not@thepony.com");
+        guestRepository.save(tom);
+
+        Guest will = new Guest("Will", "Maker", "07544777666", "will@notready.co.uk");
+        guestRepository.save(will);
 
         Restaurant diner = new Restaurant("The Diner", 20, "01764 662231", "diner@example.com");
         restaurantRepository.save(diner);
 
-        String notes = "this is a test for notes";
+        String notes = "Birthday celebration";
+        String notes1 = "Allergy to shellfish";
 
-        Reservation test = new Reservation(2, "2021-05-06", "18:30", simon, diner, notes);
-        reservationRepository.save(test);
+        Reservation booking1 = new Reservation(2, "2021-05-06", "18:30", simon, diner);
+        reservationRepository.save(booking1);
+
+        Reservation booking2 = new Reservation(1, "2021-05-06", "19:30", tom, diner, notes1);
+        reservationRepository.save(booking2);
+
+        Reservation booking3 = new Reservation(4, "2021-05-06", "20:00", will, diner, notes);
+        reservationRepository.save(booking3);
     }
 }
