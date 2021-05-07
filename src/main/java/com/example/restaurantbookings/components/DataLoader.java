@@ -3,9 +3,11 @@ package com.example.restaurantbookings.components;
 import com.example.restaurantbookings.models.Guest;
 import com.example.restaurantbookings.models.Reservation;
 import com.example.restaurantbookings.models.Restaurant;
+import com.example.restaurantbookings.models.TableModel;
 import com.example.restaurantbookings.repositories.GuestRepository;
 import com.example.restaurantbookings.repositories.ReservationRepository;
 import com.example.restaurantbookings.repositories.RestaurantRepository;
+import com.example.restaurantbookings.repositories.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -24,6 +26,9 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     ReservationRepository reservationRepository;
+
+    @Autowired
+    TableRepository tableRepository;
 
     public DataLoader() {
     }
@@ -52,5 +57,26 @@ public class DataLoader implements ApplicationRunner {
 
         Reservation booking3 = new Reservation(4, "2021-05-06", "20:00", will, diner, notes);
         reservationRepository.save(booking3);
+
+        TableModel table1 = new TableModel(1, 4);
+        tableRepository.save(table1);
+
+        TableModel table2 = new TableModel(2, 2);
+        tableRepository.save(table2);
+
+        TableModel table3 = new TableModel(3, 2);
+        tableRepository.save(table3);
+
+        booking1.setTable(table2);
+        reservationRepository.save(booking1);
+
+        booking3.setTable(table1);
+        reservationRepository.save(booking3);
+
+        booking2.setTable(table3);
+        reservationRepository.save(booking2);
+
+        booking2.removeTable();
+        reservationRepository.save(booking2);
     }
 }

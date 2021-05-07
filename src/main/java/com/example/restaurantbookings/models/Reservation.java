@@ -38,8 +38,14 @@ public class Reservation {
     @Column(name = "status")
     private String status;
 
+    @ManyToOne
+    @JoinColumn(name = "table_id")
+    @JsonIgnoreProperties({"reservations"})
+    private TableModel table;
+
     public Reservation() {
         this.status = "booked";
+        this.table = null;
     }
 
     public Reservation(int covers, String date, String time, Guest guest, Restaurant restaurant, String notes) {
@@ -50,6 +56,7 @@ public class Reservation {
         this.restaurant = restaurant;
         this.notes = notes;
         this.status = "booked";
+        this.table = null;
     }
 
     public Reservation(int covers, String date, String time, Guest guest, Restaurant restaurant) {
@@ -59,6 +66,7 @@ public class Reservation {
         this.guest = guest;
         this.restaurant = restaurant;
         this.status = "booked";
+        this.table = null;
     }
 
     public Long getId() {
@@ -123,5 +131,17 @@ public class Reservation {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public TableModel getTable() {
+        return table;
+    }
+
+    public void setTable(TableModel table) {
+        this.table = table;
+    }
+
+    public void removeTable() {
+        this.table = null;
     }
 }
