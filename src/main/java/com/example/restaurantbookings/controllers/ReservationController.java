@@ -18,6 +18,11 @@ public class ReservationController {
         return new ResponseEntity(reservationRepository.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/reservations/{id}")
+    public ResponseEntity<Reservation> getReservation(@PathVariable Long id){
+        return new ResponseEntity(reservationRepository.findById(id), HttpStatus.OK);
+    }
+
     @PutMapping(value = "/reservations/{id}")
     public ResponseEntity<Reservation> updateReservations(@RequestBody Reservation reservation, @PathVariable Long id){
         Reservation foundReservation = reservationRepository.findById(id).get();
@@ -27,6 +32,8 @@ public class ReservationController {
         foundReservation.setTime(reservation.getTime());
         foundReservation.setNotes(reservation.getNotes());
         foundReservation.setRestaurant(reservation.getRestaurant());
+        foundReservation.setStatus(reservation.getStatus());
+        foundReservation.setTable(reservation.getTable());
         reservationRepository.save(foundReservation);
         return new ResponseEntity(foundReservation, HttpStatus.OK);
     }
@@ -41,5 +48,14 @@ public class ReservationController {
     public ResponseEntity<Reservation> deleteRestaurant(@PathVariable Long id){
         reservationRepository.deleteById(id);
         return new ResponseEntity(reservationRepository.findAll(), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/reservations/{id}/depart")
+    public ResponseEntity<Reservation> departReservation(@RequestBody Reservation reservation, @PathVariable Long id) {
+        Reservation foundReservation = reservationRepository.findById(id).get();
+        foundReservation.setStatus(reservation.getStatus());
+        foundReservation.removeTable();
+        reservationRepository.save(foundReservation);
+        return new ResponseEntity(foundReservation, HttpStatus.OK);
     }
 }

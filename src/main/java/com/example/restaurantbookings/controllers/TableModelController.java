@@ -18,6 +18,11 @@ public class TableModelController {
         return new ResponseEntity(tableRepository.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/tables/{id}")
+    public ResponseEntity<TableModel> getTable(@PathVariable Long id) {
+        return new ResponseEntity(tableRepository.findById(id), HttpStatus.OK);
+    }
+
     @PutMapping(value = "/tables/{id}")
     public ResponseEntity<TableModel> updateTable(@RequestBody TableModel table, @PathVariable Long id) {
         TableModel foundTable = tableRepository.findById(id).get();

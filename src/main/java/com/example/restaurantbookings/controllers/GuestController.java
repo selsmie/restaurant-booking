@@ -18,6 +18,11 @@ public class GuestController {
         return new ResponseEntity(guestRepository.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/guests/{id}")
+    public ResponseEntity<Guest> getGuest(@PathVariable Long id){
+        return new ResponseEntity(guestRepository.findById(id), HttpStatus.OK);
+    }
+
     @PutMapping(value = "/guests/{id}")
     public ResponseEntity<Guest> updateGuest(@RequestBody Guest guest, @PathVariable Long id){
         Guest foundGuest = guestRepository.findById(id).get();

@@ -18,6 +18,11 @@ public class RestaurantController {
         return new ResponseEntity(restaurantRepository.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/restaurants/{id}")
+    public ResponseEntity<Restaurant> getRestaurant(@PathVariable Long id){
+        return new ResponseEntity(restaurantRepository.findById(id), HttpStatus.OK);
+    }
+
     @PutMapping(value = "/restaurants/{id}")
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant, @PathVariable Long id){
         Restaurant foundRestaurant = restaurantRepository.findById(id).get();

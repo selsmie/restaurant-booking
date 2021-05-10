@@ -20,7 +20,9 @@ public class TableModel {
     @Column(name = "capacity")
     private int capacity;
 
-//    @Column(name = "reservation")
+    @Column(name = "shape")
+    private String shape;
+
     @OneToMany
     @JoinColumn(name = "table_id")
     @JsonIgnoreProperties({"table"})
@@ -30,9 +32,10 @@ public class TableModel {
         this.reservations = new ArrayList<>();
     }
 
-    public TableModel(int number, int capacity) {
+    public TableModel(int number, int capacity, String shape) {
         this.number = number;
         this.capacity = capacity;
+        this.shape = shape;
         this.reservations = new ArrayList<>();
     }
 
@@ -66,5 +69,13 @@ public class TableModel {
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    public String getShape() {
+        return shape;
+    }
+
+    public void setShape(String shape) {
+        this.shape = shape;
     }
 }

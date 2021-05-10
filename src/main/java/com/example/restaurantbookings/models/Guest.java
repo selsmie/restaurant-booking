@@ -30,7 +30,7 @@ public class Guest {
     @Column(name = "visits")
     private int visits;
 
-    @OneToMany(mappedBy = "restaurant")
+    @OneToMany(mappedBy = "guest")
     @JsonIgnoreProperties({"restaurant"})
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<Reservation> reservations;
